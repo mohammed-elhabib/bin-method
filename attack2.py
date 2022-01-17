@@ -29,8 +29,8 @@ def noisy(noise_typ, image_sru):
         noisy = image + image * gauss
         return noisy
     elif noise_typ == "croppe":
-        y = 0
-        x = 0
+        y = 100
+        x = 100
         h = 1000
         w = 1000
         return image[y:y + h, x:x + w]

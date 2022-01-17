@@ -75,3 +75,10 @@ print("attack_speckle_image_w")
 compressed = cv2.imread(attack_speckle_image_w, 1)
 value = PSNR(original, compressed)
 print(f"PSNR value is {value} dB")
+original = cv2.imread("imag_host.png")
+
+print("original")
+compressed = cv2.imread(image_water_marked, 1)
+
+value = PSNR(original, compressed)
+print(f"PSNR value is {value} dB")
