@@ -1,12 +1,14 @@
+import math
 from math import log10, sqrt
 
 import cv2
 import numpy as np
+from PIL import Image
 
 from attack2 import noisy
 from bin_method import embedd_watermark, extract_watermark, printImage, readImage, readWaterImage
 
-image_host = "input/X-Ray-3.jpg"
+image_host = "input/X-Ray-7.jfif"
 image_water_marked = "imag_host_1.png"
 image_water_mark = "input/w.png"
 image_water_mark_extract = "mark_extract"
@@ -38,19 +40,19 @@ extract_watermark(attack_croppe_image, attack_croppe_image_w)
 
 def PSNR(original, compressed):
     mse = np.mean((original - compressed) ** 2)
-    if(mse == 0):  # MSE is zero means no noise is present in the signal .
-                  # Therefore PSNR have no importance.
+    if mse == 0:
         return 100
-    max_pixel = 255.0
-    psnr = 20 * log10(max_pixel / sqrt(mse))
-    return psnr
+    PIXEL_MAX = 255.0
+    PSNR = 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
+    return PSNR
 
 original = cv2.imread("w_l.png")
 
 print("attack_gauss_image_w")
 compressed = cv2.imread("attacks/attack_croppe_image_w.png_1.png", 1)
-value = PSNR(compressed,original )
+value = cv2.PSNR(original,compressed,255 )
 print(f"PSNR 1 value is {value} dB")
+
 compressed = cv2.imread("attacks/attack_croppe_image_w.png_2.png", 1)
 value = PSNR(compressed,original )
 print(f"PSNR 2 value is {value} dB")
