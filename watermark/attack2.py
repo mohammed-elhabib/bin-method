@@ -4,12 +4,14 @@ from PIL import Image
 
 
 def noisy(noise_typ, image_sru):
-    image = cv2.imread(image_sru)
+    row=1200
+    col=1200
+    ch=3
+    img = Image.open(image_sru).resize((row, col), 1)
+    image = np.array(img.getdata()).reshape((row, col, ch))
     if noise_typ == "gauss":
-        print(image)
-        row, col, ch = image.shape
         mean = 0
-        var = 0.1
+        var = 0.3
         sigma = var ** 0.5
         gauss = np.random.normal(mean, sigma, (row, col, ch))
         gauss = gauss.reshape(row, col, ch)
@@ -29,10 +31,10 @@ def noisy(noise_typ, image_sru):
         noisy = image + image * gauss
         return noisy
     elif noise_typ == "croppe":
-        y = 100
-        x = 100
-        h = 1000
-        w = 1000
+        y = 200
+        x = 200
+        h = 800
+        w = 800
         return image[y:y + h, x:x + w]
 
 
