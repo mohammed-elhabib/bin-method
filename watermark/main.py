@@ -35,7 +35,7 @@ def cut(param, image_water_marked):
 
 image_host = "input/X-Ray-7.jfif"
 image_water_marked = "image_water_marked.png"
-image_water_mark = "input/w.png"
+image_water_mark = "w.png" #"input/w.png"
 image_water_mark_extract = "mark_extract"
 # attacks  gauss speckle s&p poisson
 attack_gauss_image = "attacks/attack_gauss_image.png"
